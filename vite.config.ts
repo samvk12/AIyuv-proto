@@ -27,10 +27,13 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
+
+  // ✅ FIXED BUILD OUTPUT
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: "dist",        // relative to root (client/dist)
     emptyOutDir: true,
   },
+
   server: {
     fs: {
       strict: true,
