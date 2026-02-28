@@ -191,6 +191,39 @@ export const preventiveGuidanceSchema = z.object({
 
 export type PreventiveGuidance = z.infer<typeof preventiveGuidanceSchema>;
 
+// Daily Preventive Care tips (client-facing)
+export const preventiveTipCategorySchema = z.enum([
+  "lifestyle",
+  "food",
+  "hydration",
+  "sleep",
+  "activity",
+  "mental_wellness",
+]);
+
+export type PreventiveTipCategory = z.infer<typeof preventiveTipCategorySchema>;
+
+export const preventiveTipSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  benefit: z.string(),
+  riskPrevention: z.string(),
+  icon: z.string(),
+  category: preventiveTipCategorySchema,
+});
+
+export type PreventiveTip = z.infer<typeof preventiveTipSchema>;
+
+export const dailyPreventiveCareSchema = z.object({
+  greeting: z.string(),
+  focusArea: z.string(),
+  streakDays: z.number().int().min(0),
+  tips: z.array(preventiveTipSchema),
+});
+
+export type DailyPreventiveCare = z.infer<typeof dailyPreventiveCareSchema>;
+
 // Medical Awareness section
 export const medicalAwarenessSchema = z.object({
   escalationAdvice: z.array(z.string()),
